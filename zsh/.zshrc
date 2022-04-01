@@ -69,12 +69,21 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions sudo zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit; compinit
 prompt_context() {}
 bindkey -v
+
+# For sudo plugin but it did not work
+bindkey -M vicmd '^S' sudo-command-line
+bindkey -M viins '^S' sudo-command-line
+
+# Press <C-e> to edit a command in Vim
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
 
 # User configuration
 
@@ -133,26 +142,32 @@ _fix_cursor() {
 }
 precmd_functions+=(_fix_cursor)
 
+
+
+
 # Aliases
 
-# Configs
+## Configs
 alias zrc="nvim ~/.zshrc"
 alias nrc="nvim ~/.config/nvim"
 alias wrc="nvim ~/.config/awesome/rc.lua"
 
-# Vim
+## Vim
 alias vim="nvim"
 alias vi="nvim"
+alias v="nvim"
 
-# General
+## General
 alias lsl="ls -la"
 alias et="exit"
 
-# Docker
+## Docker
 alias dcu="sudo docker compose up"
 alias dcub="sudo docker compose up --build"
 
-# Projects
+## Projects
+
+alias pwiki="nvim ~/programming/personal-wiki.md"
 alias cfg="cd ~/.config/";
 
 alias cdpr="cd ~/programming/"
