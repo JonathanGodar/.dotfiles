@@ -134,18 +134,27 @@ _fix_cursor() {
 precmd_functions+=(_fix_cursor)
 
 # Aliases
+
+# Configs
 alias zrc="nvim ~/.zshrc"
 alias nrc="nvim ~/.config/nvim"
 alias wrc="nvim ~/.config/awesome/rc.lua"
 
+# Vim
 alias vim="nvim"
 alias vi="nvim"
 
+# General
 alias lsl="ls -la"
+alias et="exit"
 
-alias cfg="cd ~/.config/";
+# Docker
+alias dcu="sudo docker compose up"
+alias dcub="sudo docker compose up --build"
 
 # Projects
-alias pr="cd ~/programming/"
-alias cdlj="cd ~/programming/ljusportalen/"
+alias cfg="cd ~/.config/";
 
+alias cdpr="cd ~/programming/"
+alias cdlj="cd ~/programming/ljusportalen/"
+alias cdls="nvim ~/programming/linux-setup/"
