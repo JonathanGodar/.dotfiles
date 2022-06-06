@@ -1,1 +1,2 @@
+xrandr --output DP-0 --mode 1920x1080 --rate 144 --pos 0x0 --rotate left --output DP-2 --primary --mode 1919x1080 --rate 144 --pos 1080x284 --rotate normalxrandr --output DP-0 --mode 1920x1080 --rate 144 --pos 0x0 --rotate left --output DP-2 --primary --mode 1920x1080 --rate 144 --pos 1080x284 --rotate normal
 nitrogen --restore

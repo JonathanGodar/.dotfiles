@@ -1,8 +1,16 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export PATH="$(yarn global bin):/home/jonathan/.local/bin:$PATH"
+
+# Add gopath
+export PATH="$HOME/go/bin/:$PATH"
+source $HOME/.cargo/env
+# export PATH="$HOME/.cargo/env"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export CONFIG_DIR="$HOME/.dotfiles/"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -149,26 +157,33 @@ precmd_functions+=(_fix_cursor)
 
 ## Configs
 alias zrc="nvim ~/.zshrc"
-alias nrc="nvim ~/.config/nvim"
-alias wrc="nvim ~/.config/awesome/rc.lua"
+alias nrc="nvim $CONFIG_DIR/nvim/.config/nvim"
+alias wrc="nvim $CONFIG_DIR/awesome/.config/awesome/rc.lua"
 
 ## Vim
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
 
+
+alias fm="vifm ."
+
 ## General
 alias lsl="ls -la"
 alias et="exit"
+
+## Git
+alias gs="git status"
+alias gc="git commit"
+alias gp="git pull"
 
 ## Docker
 alias dcu="sudo docker compose up"
 alias dcub="sudo docker compose up --build"
 
 ## Projects
-
 alias pwiki="nvim ~/programming/personal-wiki.md"
-alias cfg="cd ~/.config/";
+alias cfg="cd $CONFIG_DIR";
 
 alias cdpr="cd ~/programming/"
 alias cdlj="cd ~/programming/ljusportalen/"

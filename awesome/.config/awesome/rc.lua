@@ -14,6 +14,11 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
+
+-- require "user"
+
+--
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 -- require("awful.hotkeys_popup.keys")
@@ -69,6 +74,7 @@ awful.layout.layouts = {
     awful.layout.suit.fair.horizontal,
     --awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
+    --
     -- awful.layout.suit.tile.top,
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.max,
@@ -80,6 +86,27 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.se,
 }
 -- }}}
+
+local spawn_browser_command = "google-chrome-stable --profile-directory=Default"
+
+local function setup_development_env()
+
+
+
+
+  -- local screen = awful.screen.focused()
+  -- local tag = screen.tags[3]
+  --
+  -- if not tag then
+  --   naughty.notify({text="hej"})
+  -- else
+  --   awful.spawn("slack", {
+  --     tag=tag,
+  --   })
+  --   naughty.notify({text="spawned browser"})
+  -- end
+end
+
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
@@ -229,14 +256,23 @@ root.buttons(gears.table.join(
 -- }}}
 
 
-local startup_scripts = function ()
- 	gears.timer.delayed_call(function() awful.spawn.with_shell("nitrogen --restore") end)
-	awful.spawn.easy_async("pgrep redshift", function(stdout)
-    if stdout == "" then
-				awful.spawn.with_shell("redshift -l 59.329323:18.068581 -t 6500:2500")
-    end
-	end)
+local startup_scripts = function()
+  gears.timer.delayed_call(function() awful.spawn.with_shell("nitrogen --restore") end)
+  awful.spawn.easy_async("pgrep redshift", function(stdout)
+      if stdout == "" then
+	awful.spawn.with_shell("redshift -l 59.329323:18.068581 -t 6500:2500")
+      end
+  end)
 end
+
+-- local startup_scripts = function ()
+--     gears.timer.delayed_call(function() awful.spawn.with_shell("nitrogen --restore") end)
+--       awful.spawn.easy_async("pgrep redshift", function(stdout)
+-- 	if stdout == "" then
+-- 				    awful.spawn.with_shell("redshift -l 59.329323:18.068581 -t 6500:2500")
+-- 	end
+-- 	end)
+-- end
 
 local restart_awesome = function()
 	awesome.restart()
@@ -351,9 +387,10 @@ globalkeys = gears.table.join(
     awful.key({"Mod1", "Control"}, "b", function () awful.spawn("firefox") end,
               {description = "launch browser", group="launcher"}),
 
-		awful.key({"Mod1", "Control"}, "v", function () awful.spawn("google-chrome-stable --profile-directory=Default") end,
+		awful.key({"Mod1", "Control"}, "v", function () awful.spawn(spawn_browser_command) end,
 							{description="launch chrome", group="launcher"}),
 
+    awful.key({ modkey }, "t", setup_development_env),
 
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
@@ -384,6 +421,9 @@ globalkeys = gears.table.join(
 		awful.key({}, "XF86AudioRaiseVolume", function() awful.spawn('pactl -- set-sink-volume 0 +2%') end, --.with_shell("playerctl playpause") end,
 							{}),
 		awful.key({}, "XF86AudioLowerVolume", function() awful.spawn.with_shell('pactl -- set-sink-volume 0 -2%') end, --.with_shell("playerctl playpause") end,
+							{}),
+
+		awful.key({}, "XF86AudioMute", function() awful.spawn.with_shell("pactl -- set-sink-mute 0 toggle") end,
 							{})
 )
 
@@ -546,6 +586,13 @@ awful.rules.rules = {
         }
       }, properties = { floating = true }},
 
+		{
+			rule = {name="leftscreen"},
+			properties = {
+				screen = 2,
+				focus = false,
+			}
+		}
     -- Add titlebars to normal clients and dialogs
     -- { rule_any = {type = { "normal", "dialog" }
     --   }, properties = { titlebars_enabled = true }
