@@ -16,7 +16,6 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 
--- require "user"
 
 --
 -- Enable hotkeys help widget for VIM and other apps
@@ -26,7 +25,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
-
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
                      title = "Oops, there were errors during startup!",
@@ -88,25 +86,6 @@ awful.layout.layouts = {
 -- }}}
 
 local spawn_browser_command = "google-chrome-stable --profile-directory=Default"
-
-local function setup_development_env()
-
-
-
-
-  -- local screen = awful.screen.focused()
-  -- local tag = screen.tags[3]
-  --
-  -- if not tag then
-  --   naughty.notify({text="hej"})
-  -- else
-  --   awful.spawn("slack", {
-  --     tag=tag,
-  --   })
-  --   naughty.notify({text="spawned browser"})
-  -- end
-end
-
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
@@ -326,22 +305,6 @@ globalkeys = gears.table.join(
         {description = "go back", group = "client"}),
 
     -- Custom layout manipulation
-    awful.key({modkey}, 'd',
-			function ()
-				for _, cl in ipairs(mouse.screen.selected_tag:clients()) do
-					local c = cl
-					if c then
-						if _G.client.focus then
-							c.minimized = true
-							else
-								c.minimized = false
-						end
-					end
-				end
-			end,
-			{description = "min/max all windows", group = "client"}
-			),
-
 		-- Application launher
 		awful.key({'Mod1'}, '#65', function () awful.spawn('rofi -show drun') end,
 			{description="start the application launcher", group = "launcher"}),
@@ -372,6 +335,21 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
+    awful.key({modkey}, 'd',
+			function ()
+				for _, cl in ipairs(mouse.screen.selected_tag:clients()) do
+					local c = cl
+					if c then
+						if _G.client.focus then
+							c.minimized = true
+							else
+								c.minimized = false
+						end
+					end
+				end
+			end,
+			{description = "min/max all windows", group = "client"}
+			),
     awful.key({ modkey, "Control" }, "n",
               function ()
                   local c = awful.client.restore()
