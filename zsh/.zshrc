@@ -181,6 +181,9 @@ alias gp="git pull"
 alias dcu="sudo docker compose up"
 alias dcub="sudo docker compose up --build"
 
+# Spawning programs
+alias ala="exec alacritty </dev/null &>/dev/null &!"
+
 ## Projects
 alias pwiki="nvim ~/programming/personal-wiki.md"
 alias cfg="cd $CONFIG_DIR";
@@ -188,3 +191,10 @@ alias cfg="cd $CONFIG_DIR";
 alias cdpr="cd ~/programming/"
 alias cdlj="cd ~/programming/ljusportalen/"
 alias cdls="nvim ~/programming/linux-setup/"
+
+# bun completions
+[ -s "/home/jonathan/.bun/_bun" ] && source "/home/jonathan/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/home/jonathan/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

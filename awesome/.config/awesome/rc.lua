@@ -16,6 +16,8 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 
+awful.spawn.with_shell("/home/jonathan/.screenlayout/both-horizontal.sh")
+-- require "user"
 
 --
 -- Enable hotkeys help widget for VIM and other apps
@@ -650,10 +652,11 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart
 
+awful.spawn.with_shell("picom --experimental-backends")
+awful.spawn.with_shell("playerctld daemon")
+awful.spawn.with_shell("systemctl --user start mchostd")
 startup_scripts();
 
 -- awful.spawn.with_shell("nitrogen --restore --set-zoom-fill ~/wallpapers")
-awful.spawn.with_shell("picom --experimental-backends")
-awful.spawn.with_shell("playerctld daemon")
 -- awful.spawn.with_shell("redshift -l 59.329323:18.068581 -t 6500:2500")
 
